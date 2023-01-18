@@ -1,0 +1,68 @@
+{{page-title "Transfer"}}
+<div class="w-75 mx-auto">
+    <div class="text-center h3 p-2">Bank Transfer</div>
+    {{#if this.is_error}}
+        <div class="alert alert-danger" role="alert">{{this.error_message}}</div>
+    {{/if}}
+    <div class="mx-auto" style="width:600px;">
+        <form {{action "submit" this on="submit"}}>
+            <div class="mb-3 row">
+                <label class="col-sm-4 col-form-label">Beneficiary</label>
+                <div class="col-sm-8">
+                    <select class="form-select" onchange={{action 'setBeneficiary' value='target.value'}}>
+                        <option disabled selected> -- Select Beneficiary -- </option>
+                        {{#each @model.beneficiaries as |beneficiary|}}
+                            <option value={{beneficiary.beneficiary_id}}>{{beneficiary.nick_name}}</option>
+                        {{/each}}
+                    </select>
+                </div>
+            </div>
+            {{#if this.beneficiary}}
+                <div class="mb-3 row">
+                    <label class="col-sm-4 col-form-label">{{this.beneficiary.type}}</label>
+                    <label class="col-sm-8 col-form-label">{{this.beneficiary.reference}}</label>
+                </div>
+            {{/if}}
+            <div class="mb-3 row">
+                <label class="col-sm-4 col-form-label">Description</label>
+                <div class="col-sm-8">
+                    <Input @type="text" @value={{this.description}} class="form-control"/>
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label class="col-sm-4 col-form-label">Amount</label>
+                <div class="col-sm-8">
+                    <Input @type="number" @value={{this.amount}} min="0" class="form-control"/>
+                </div>
+            </div>
+            {{#if this.is_upi}}
+                <div class="mb-3 row">
+                    <label class="col-sm-4 col-form-label">Your UPI ID</label>
+                    <div class="col-sm-8">
+                        <select class="form-select" onchange={{action 'setUPIID' value='target.value'}}>
+                            <option disabled selected> -- Select UPI ID -- </option>
+                            {{#each @model.upis as |upi|}}
+                                <option value={{upi.upi_store_id}}>{{upi.upi_id}}</option>
+                            {{/each}}
+                        </select>
+                    </div>
+                </div>
+            {{/if}}
+            <div class="mb-3 row">
+                <label class="col-sm-4 col-form-label">
+                    {{if this.is_upi 'UPI Pin'}}
+                    {{unless this.is_upi 'TOTP'}}
+                </label>
+                <div class="col-sm-8">
+                    <Input @type="password" @value={{this.password}} class="form-control"/>
+                </div>
+            </div>
+            {{#if this.beneficiary}}
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            {{/if}}
+        </form>
+    </div>
+</div>
+{{outlet}}

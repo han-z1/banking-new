@@ -1,0 +1,32 @@
+{{page-title "Upi"}}
+<div class="w-50 mx-auto">
+    <div class="text-center h3 p-2">UPI Registration</div>
+
+    <table class="table table-striped table-hover">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>UPI ID</th>
+            <th>Registered Date</th>
+        </tr>
+        </thead>
+        {{#if @model.data}}
+        <tbody>
+            {{#each @model.data as |upi|}}
+            <tr>
+                <td>{{upi.upi_store_id}}</td>
+                <td>{{upi.upi_id}}</td>
+                <td>{{upi.register_date}}</td>
+            </tr>
+            {{/each}}
+        </tbody>
+        {{/if}}
+    </table> 
+    {{#unless @model.data}}
+    <div class="text-center p-3">
+        You have not registered for UPI ID
+    </div>
+    {{/unless}}
+    <LinkTo @route="new-upi" class="btn btn-primary" role="button">+ UPI ID</LinkTo>
+</div>
+{{outlet}}

@@ -1,0 +1,54 @@
+{{page-title "Transact"}}
+<div class="w-75 mx-auto">
+    <div class="text-center h3 p-2">Bank Transaction</div>
+    {{#if this.is_success}}
+        <div class="alert alert-success" role="alert">{{this.success_message}}</div>
+    {{/if}}
+    {{#if this.is_error}}
+        <div class="alert alert-danger" role="alert">{{this.error_message}}</div>
+    {{/if}}
+    <div class="mx-auto" style="width:600px;">
+        <form {{action "submit" this on="submit"}}>
+            <div class="mb-3 row">
+                <div class="col-sm-3 form-check"></div>
+                <div class="col-sm-3 form-check">
+                    <input class="form-check-input" type="radio" name="type" onchange={{action 'setType' '0'}}>
+                    <label class="form-check-label">
+                        Deposit
+                    </label>
+                </div>
+                <div class="col-sm-3 form-check">
+                    <input class="form-check-input" type="radio" name="type" onchange={{action 'setType' '1'}}>
+                    <label class="form-check-label">
+                        Withdraw
+                    </label>
+                </div>
+                <div class="col-sm-3 form-check"></div>
+            </div>
+            <div class="mb-3 row">
+                <label class="col-sm-4 col-form-label">Account Number</label>
+                <div class="col-sm-8">
+                    <Input @type="number" @value={{this.accountNumber}} class="form-control"/>
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label class="col-sm-4 col-form-label">Description</label>
+                <div class="col-sm-8">
+                    <Input @type="text" @value={{this.description}} class="form-control"/>
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label class="col-sm-4 col-form-label">Amount</label>
+                <div class="col-sm-8">
+                    <Input @type="number" @value={{this.amount}} min="0" class="form-control"/>
+                </div>
+            </div>
+            {{#if this.type}}
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            {{/if}}
+        </form>
+    </div>
+</div>
+{{outlet}}

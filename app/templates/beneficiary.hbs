@@ -1,0 +1,35 @@
+{{page-title "Beneficiary"}}
+<div class="w-50 mx-auto">
+    <div class="text-center h3 p-2">Beneficiary Details</div>
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nick Name</th>
+                <th>Type</th>
+                <th>Reference</th>
+                <th>Registered Date</th>
+            </tr>
+        </thead>
+        {{#if @model.data}}
+        <tbody>
+            {{#each @model.data as |beneficiary|}}
+            <tr>
+                <td>{{beneficiary.beneficiary_id}}</td>
+                <td>{{beneficiary.nick_name}}</td>
+                <td>{{beneficiary.type}}</td>
+                <td>{{beneficiary.reference}}</td>
+                <td>{{beneficiary.register_date}}</td>
+            </tr>
+            {{/each}}
+        </tbody>
+        {{/if}}
+    </table> 
+    {{#unless @model.data}}
+    <div class="text-center p-3">
+        You have not added any beneficiary
+    </div>
+    {{/unless}}
+    <LinkTo @route="new-beneficiary" class="btn btn-primary" role="button">+ Beneficiary</LinkTo>
+</div>
+{{outlet}}

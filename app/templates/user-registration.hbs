@@ -1,0 +1,58 @@
+{{page-title "UserRegistration"}}
+<div class="w-75 mx-auto">
+    <div class="text-center h3 p-2">User Registration</div>
+
+    {{#if this.is_error}}
+        <div class="alert alert-danger" role="alert">{{this.error_message}}</div>
+    {{/if}}
+    <div class="mx-auto" style="width:600px;">
+        <form {{action "submit" this on="submit"}}>
+            <div class="mb-3 row">
+                <label class="col-sm-4 col-form-label">First Name</label>
+                <div class="col-sm-8">
+                    <Input @type="text" @value={{this.firstName}} class="form-control"/>
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label class="col-sm-4 col-form-label">Last Name</label>
+                <div class="col-sm-8">
+                    <Input @type="text" @value={{this.lastName}} class="form-control"/>
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label class="col-sm-4 col-form-label">Date of Birth</label>
+                <div class="col-sm-8">
+                    <Input @type="date" @value={{this.dateOfBirth}} class="form-control"/>
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label class="col-sm-4 col-form-label">Mobile Number</label>
+                <div class="col-sm-8">
+                    <Input @type="number" @value={{this.mobileNumber}} class="form-control"/>
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label class="col-sm-4 col-form-label">Email ID</label>
+                <div class="col-sm-8">
+                    <Input @type="text" @value={{this.emailID}} class="form-control"/>
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label class="col-sm-4 col-form-label">Password</label>
+                <div class="col-sm-8">
+                    <Input @type="password" @value={{this.password}} class="form-control"/>
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label class="col-sm-4 col-form-label">Re-enter Password</label>
+                <div class="col-sm-8">
+                    <Input @type="password" @value={{this.reenterPassword}} class="form-control"/>
+                </div>
+            </div>
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary">Signup</button>
+            </div>
+        </form>
+    </div>
+</div>
+{{outlet}}

@@ -1,0 +1,65 @@
+{{page-title "Login"}}
+<div class="w-75 mx-auto">
+    <div class="text-center h3 p-2">User Login</div>
+
+    {{#if this.is_error}}
+        <div class="alert alert-danger" role="alert">{{this.error_message}}</div>
+    {{/if}}
+    <div class="mx-auto" style="width:600px;">
+        <form {{action "submit" this on="submit"}}>
+            <div class="mb-3 row">
+                <div class="col-sm-3 form-check"></div>
+                <div class="col-sm-3 form-check">
+                    <input class="form-check-input" type="radio" name="type" onchange={{action 'setEmailLogin' false}} checked>
+                    <label class="form-check-label">
+                        Customer ID
+                    </label>
+                </div>
+                <div class="col-sm-3 form-check">
+                    <input class="form-check-input" type="radio" name="type" onchange={{action 'setEmailLogin' true}}>
+                    <label class="form-check-label">
+                        Email ID
+                    </label>
+                </div>
+                <div class="col-sm-3 form-check"></div>
+            </div>
+            <div class="mb-3 row">
+                <label class="col-sm-4 col-form-label">
+                    {{unless this.is_email_login "Customer ID :"}}
+                    {{if this.is_email_login "Email ID :"}}
+                </label>
+                <div class="col-sm-8">
+                    <Input @type="text" @value={{this.loginID}} class="form-control"/>
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label class="col-sm-4 col-form-label">Password</label>
+                <div class="col-sm-8">
+                    <Input @type="password" @value={{this.password}} class="form-control"/>
+                </div>
+            </div>
+            {{#if this.configure_tfa}}
+            <div class="mb-3 row text-center">
+                <label class="col-sm-12 col-form-label">Configure TFA</label>
+            </div>
+            <div class="mb-3 row">
+                <label class="col-sm-4 col-form-label">TFA Secret</label>
+                <label class="col-sm-8 col-form-label">{{this.tfa_secret}}</label>
+            </div>
+            {{/if}}
+            {{#if this.validate_tfa}}
+            <div class="mb-3 row">
+                <label class="col-sm-4 col-form-label">TOTP</label>
+                <div class="col-sm-8">
+                    <Input @type="text" @value={{this.totp}} class="form-control"/>
+                </div>
+            </div>
+            {{/if}}
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary">Login</button>
+                <LinkTo @route="user-registration" class="btn btn-primary" role="button">Signup</LinkTo>
+            </div>
+        </form>
+    </div>
+</div>
+{{outlet}}

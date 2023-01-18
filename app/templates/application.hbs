@@ -1,7 +1,38 @@
 {{page-title "BankingNew"}}
-
-{{!-- The following component displays Ember's default welcome message. --}}
-<WelcomePage />
-{{!-- Feel free to remove this! --}}
-
-{{outlet}}
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-2" >
+      <div class="px-2 text-white">
+        <img src="/favicon.ico" width="25" height="25" class="d-inline-block align-top" alt="">
+        Bank
+      </div>
+      {{#unless this.appMeta.isLogin}}
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          {{#unless this.appMeta.isBankStaff}}
+          <li class="nav-item active">
+            <LinkTo @route='account' class="nav-link">Account</LinkTo>
+          </li>
+          <li class="nav-item">
+            <LinkTo @route='upi' class="nav-link">UPI</LinkTo>
+          </li>
+          <li class="nav-item">
+            <LinkTo @route='beneficiary' class="nav-link">Beneficiary</LinkTo>
+          </li>
+          <li class="nav-item">
+            <LinkTo @route='transfer' class="nav-link">Transfer</LinkTo>
+          </li>
+          <li class="nav-item">
+            <LinkTo @route='profile' class="nav-link">Profile</LinkTo>
+          </li>
+          {{/unless}}
+          {{#if this.appMeta.isBankStaff}}
+          <li class="nav-item">
+            <LinkTo @route='transact' class="nav-link">Transact</LinkTo>
+          </li>
+          {{/if}}
+        </ul>
+      </div>
+      {{/unless}}
+    </nav>
+    {{outlet}}
+  </body>

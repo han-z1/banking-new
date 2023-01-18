@@ -7,6 +7,9 @@ module.exports = function (defaults) {
     // Add options here
   });
 
+  app.import('vendor/bootstrap.bundle.min.js');
+  app.import('vendor/bootstrap.min.css');
+
   // Use `app.import` to add additional libraries to the generated
   // output files.
   //
